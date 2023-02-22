@@ -8,6 +8,18 @@
     <title>Fotos</title>
 </head>
 <body>
-    
+    <header id="header_fotos">
+        <a href="/">INICIO</a>
+    </header>
+    <main id="main_fotos">
+        <% for (index in datos){ %>
+            <section>
+                <h1><%=datos[index].titulo  %></h1>
+                <img src="<%=datos[index].url%>" alt="">
+                <p><%=datos[index].descripcion  %></p>
+                <p><%=datos[index].fecha  %></p>
+            </section>
+        <% } %>
+    </main>
 </body>
 </html>
