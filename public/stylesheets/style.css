@@ -87,39 +87,63 @@ body {
   align-items: center;
   width: 100%;
 }
-#main_fotos section {
-  height: 600px;
+#main_fotos #seccion_fotos {
   width: 400px;
   margin: 20px;
   padding: 5px;
   border: 1px solid black;
   border-radius: 10px;
 }
-#main_fotos section h1 {
+#main_fotos #seccion_fotos h1 {
   margin-bottom: 15px;
 }
-#main_fotos section img {
+#main_fotos #seccion_fotos img {
   height: 400px;
   width: 400px;
   margin-bottom: 15px;
 }
-#main_fotos section p {
+#main_fotos #seccion_fotos p {
   margin-bottom: 10px;
 }
-#main_fotos section nav {
+#main_fotos #seccion_fotos nav {
   display: flex;
   justify-content: start;
   align-items: center;
 }
-#main_fotos section nav a {
+#main_fotos #seccion_fotos nav a {
   text-decoration: none;
   color: black;
   display: flex;
   align-items: center;
 }
-#main_fotos section nav span {
+#main_fotos #seccion_fotos nav span {
   margin-right: 4px;
 }
-#main_fotos section nav .likes_dislikes {
+#main_fotos #seccion_fotos nav .likes_dislikes {
   margin-right: 15px;
+}
+#main_fotos #seccion_fotos form {
+  margin-top: 10px;
+}
+#main_fotos #seccion_fotos form input {
+  width: 350px;
+  padding: 4px;
+  font-size: 15px;
+}
+#main_fotos #seccion_fotos form textarea {
+  width: 350px;
+  padding: 4px;
+  font-size: 15px;
+  height: 70px;
+  margin-top: 4px;
+}
+#main_fotos #seccion_fotos form button {
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+#main_fotos #seccion_comentarios {
+  margin-top: 15px;
+  border: 1px solid black;
+  padding: 4px;
 }/*# sourceMappingURL=style.css.map */

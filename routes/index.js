@@ -8,8 +8,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get("/fotos", async (req,res) =>{
-  const [datos] = await pool.query("SELECT * FROM FOTOS")
-  res.render("fotos", {datos: datos, titulo: "Fotos"})
+  const [datos_fotos] = await pool.query("SELECT * FROM FOTOS")
+  const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
 })
 
 router.post("/subirfoto", async (req, res) =>{
@@ -27,6 +28,12 @@ router.get("/like/:id", async (req, res) =>{
 router.get("/dislike/:id", async (req, res) =>{
   const {id} = req.params
   await pool.query(`UPDATE FOTOS SET dislikes=dislikes+1 WHERE id=${id}`)
+  res.redirect("/fotos")
+})
+
+router.post("/enviarcomentario", async(req,res) =>{
+  const {usuario, comentario} = req.body
+  await pool.query(`INSERT INTO COMENTARIOS(usuario,comentario) VALUES ('${usuario}', '${comentario}')`)
   res.redirect("/fotos")
 })
 

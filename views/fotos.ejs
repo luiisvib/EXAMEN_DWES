@@ -6,18 +6,30 @@
         <a href="/">INICIO</a>
     </header>
     <main id="main_fotos">
-        <% for (index in datos){ %>
-            <section>
-                <h1><%=datos[index].titulo  %></h1>
-                <img src="<%=datos[index].url%>" alt="">
-                <p><%=datos[index].descripcion  %></p>
-                <p><%=datos[index].fecha  %></p>
+        <% for (index in datos_fotos){ %>
+            <section id="seccion_fotos">
+                <h1><%=datos_fotos[index].titulo  %></h1>
+                <img src="<%=datos_fotos[index].url%>" alt="">
+                <p><%=datos_fotos[index].descripcion  %></p>
+                <p><%=datos_fotos[index].fecha  %></p>
                 <nav>
-                    <a href="/like/<%=datos[index].id%>"><span class="material-symbols-outlined">thumb_up</span></a>
-                    <span class="likes_dislikes"><%=datos[index].likes%></span>
-                    <a href="/dislike/<%=datos[index].id%>"><span class="material-symbols-outlined">thumb_down</span></a>
-                    <span class="likes_dislikes"><%=datos[index].dislikes%></span>
+                    <a href="/like/<%=datos_fotos[index].id%>"><span class="material-symbols-outlined">thumb_up</span></a>
+                    <span class="likes_dislikes"><%=datos_fotos[index].likes%></span>
+                    <a href="/dislike/<%=datos_fotos[index].id%>"><span class="material-symbols-outlined">thumb_down</span></a>
+                    <span class="likes_dislikes"><%=datos_fotos[index].dislikes%></span>
                 </nav>
+                <form action="/enviarcomentario" method="POST">
+                    <input type="text" name="usuario" id="" placeholder="Usuario..">
+                    <textarea name="comentario" id="" cols="30" rows="10" placeholder="Comentario.."></textarea>
+                    <button  type="submit">Enviar</button>
+                </form>
+                <% for (index_form in datos_comentarios){ %>
+                    <section id="seccion_comentarios">
+                        <p><%=datos_comentarios[index_form].usuario  %></p>
+                        <p><%=datos_comentarios[index_form].comentario  %></p>
+                        <p><%=datos_comentarios[index_form].fecha  %></p>
+                    </section>
+                <% } %>
             </section>
         <% } %>
     </main>
