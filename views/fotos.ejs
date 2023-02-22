@@ -9,6 +9,7 @@
         <% for (index in datos_fotos){ %>
             <section id="seccion_fotos">
                 <h1><%=datos_fotos[index].titulo  %></h1>
+                <a href="/comprobar_form/<%=datos_fotos[index].id %>"><span class="material-symbols-outlined icono_borrar">delete</span></a> 
                 <img src="<%=datos_fotos[index].url%>" alt="">
                 <p><%=datos_fotos[index].descripcion  %></p>
                 <p><%=datos_fotos[index].fecha  %></p>
@@ -19,8 +20,8 @@
                     <span class="likes_dislikes"><%=datos_fotos[index].dislikes%></span>
                 </nav>
                 <form action="/enviarcomentario/<%=datos_fotos[index].id%>" method="POST">
-                    <input type="text" name="usuario" id="" placeholder="Usuario..">
-                    <textarea name="comentario" id="" cols="30" rows="10" placeholder="Comentario.."></textarea>
+                    <input type="text" name="usuario" id="" placeholder="Usuario.." required>
+                    <textarea name="comentario" id="" cols="30" rows="10" placeholder="Comentario.." required></textarea>
                     <button  type="submit">Enviar</button>
                 </form>
                 <% for (index_form in datos_comentarios){ %>

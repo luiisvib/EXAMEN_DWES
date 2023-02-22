@@ -93,9 +93,16 @@ body {
   padding: 5px;
   border: 1px solid black;
   border-radius: 10px;
+  position: relative;
 }
 #main_fotos #seccion_fotos h1 {
   margin-bottom: 15px;
+}
+#main_fotos #seccion_fotos .icono_borrar {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
 }
 #main_fotos #seccion_fotos img {
   height: 400px;
