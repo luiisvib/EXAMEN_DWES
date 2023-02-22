@@ -4,12 +4,12 @@ const pool = require("../db")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', {titulo: "Inicio"});
 });
 
 router.get("/fotos", async (req,res) =>{
   const [datos] = await pool.query("SELECT * FROM FOTOS")
-  res.render("fotos", {datos: datos})
+  res.render("fotos", {datos: datos, titulo: "Fotos"})
 })
 
 router.post("/subirfoto", async (req, res) =>{

@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <title>Fotos</title>
-</head>
+<%-include("head")  %>
 <body>
     <header id="header_fotos">
         <a href="/">INICIO</a>
@@ -18,6 +12,12 @@
                 <img src="<%=datos[index].url%>" alt="">
                 <p><%=datos[index].descripcion  %></p>
                 <p><%=datos[index].fecha  %></p>
+                <nav>
+                    <span class="material-symbols-outlined">thumb_up</span> 
+                    <span class="likes_dislikes">4</span>
+                    <span class="material-symbols-outlined">thumb_down</span> 
+                    <span class="likes_dislikes">4</span>
+                </nav>
             </section>
         <% } %>
     </main>

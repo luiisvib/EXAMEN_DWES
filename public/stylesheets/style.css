@@ -91,6 +91,9 @@ body {
   height: 600px;
   width: 400px;
   margin: 20px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 #main_fotos section h1 {
   margin-bottom: 15px;
@@ -102,4 +105,15 @@ body {
 }
 #main_fotos section p {
   margin-bottom: 10px;
+}
+#main_fotos section nav {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+#main_fotos section nav span {
+  margin-right: 4px;
+}
+#main_fotos section nav .likes_dislikes {
+  margin-right: 15px;
 }/*# sourceMappingURL=style.css.map */
