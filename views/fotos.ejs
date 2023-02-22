@@ -18,17 +18,19 @@
                     <a href="/dislike/<%=datos_fotos[index].id%>"><span class="material-symbols-outlined">thumb_down</span></a>
                     <span class="likes_dislikes"><%=datos_fotos[index].dislikes%></span>
                 </nav>
-                <form action="/enviarcomentario" method="POST">
+                <form action="/enviarcomentario/<%=datos_fotos[index].id%>" method="POST">
                     <input type="text" name="usuario" id="" placeholder="Usuario..">
                     <textarea name="comentario" id="" cols="30" rows="10" placeholder="Comentario.."></textarea>
                     <button  type="submit">Enviar</button>
                 </form>
                 <% for (index_form in datos_comentarios){ %>
-                    <section id="seccion_comentarios">
-                        <p><%=datos_comentarios[index_form].usuario  %></p>
-                        <p><%=datos_comentarios[index_form].comentario  %></p>
-                        <p><%=datos_comentarios[index_form].fecha  %></p>
-                    </section>
+                    <% if (datos_comentarios[index_form].id_foto == datos_fotos[index].id){ %>
+                        <section id="seccion_comentarios">
+                            <p>Usuario: <%=datos_comentarios[index_form].usuario  %></p>
+                            <p>Comentario: <%=datos_comentarios[index_form].comentario  %></p>
+                            <nav><%=datos_comentarios[index_form].fecha  %></nav>
+                        </section>
+                    <% } %>
                 <% } %>
             </section>
         <% } %>

@@ -146,4 +146,7 @@ body {
   margin-top: 15px;
   border: 1px solid black;
   padding: 4px;
+}
+#main_fotos #seccion_comentarios nav {
+  font-size: 12px;
 }/*# sourceMappingURL=style.css.map */

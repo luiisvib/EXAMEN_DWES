@@ -13,9 +13,27 @@ router.get("/fotos", async (req,res) =>{
   res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
 })
 
+router.get("/fotos/masvotadas", async (req, res) =>{
+  const [datos_fotos] = await pool.query("SELECT * FROM FOTOS ORDER BY  likes DESC limit 3")
+  const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+})
+
+router.get("/fotos/menosvotadas", async (req, res) =>{
+  const [datos_fotos] = await pool.query("SELECT * FROM FOTOS ORDER BY  likes ASC limit 3")
+  const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+})
+
+router.get("/fotos/comentadas", async (req, res) =>{
+  const [datos_fotos] = await pool.query("SELECT * FROM FOTOS ORDER BY likes ASC limit 3")
+  const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+})
+
 router.post("/subirfoto", async (req, res) =>{
   const {titulo, url, descripcion} = req.body
-  await pool.query(`INSERT INTO FOTOS(titulo, url, descripcion, likes, dislikes) VALUES('${titulo}', '${url}', '${descripcion}, 0, 0')`)
+  await pool.query(`INSERT INTO FOTOS(titulo, url, descripcion, likes, dislikes) VALUES('${titulo}', '${url}', '${descripcion}', 0, 0)`)
   res.redirect("/")
 })
 
@@ -31,9 +49,10 @@ router.get("/dislike/:id", async (req, res) =>{
   res.redirect("/fotos")
 })
 
-router.post("/enviarcomentario", async(req,res) =>{
+router.post("/enviarcomentario/:id", async(req,res) =>{
+  const {id} = req.params
   const {usuario, comentario} = req.body
-  await pool.query(`INSERT INTO COMENTARIOS(usuario,comentario) VALUES ('${usuario}', '${comentario}')`)
+  await pool.query(`INSERT INTO COMENTARIOS(id_foto, usuario,comentario) VALUES (${id},'${usuario}', '${comentario}')`)
   res.redirect("/fotos")
 })
 

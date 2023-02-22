@@ -18,11 +18,11 @@ INSERT INTO FOTOS(titulo,url,descripcion,likes, dislikes) VALUES("Tigre","/image
 INSERT INTO FOTOS(titulo,url,descripcion,likes, dislikes)  VALUES("Elefante","/images/imagen3.jpeg","Esto es un elefante muy bonito",0,0);
 
 DROP TABLE IF EXISTS COMENTARIOS;
-CREATE TABLE FOTOS(
+CREATE TABLE COMENTARIOS(
     id int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_foto int UNSIGNED,
     usuario varchar(45) NOT NULL,
     comentario varchar(500) NOT NULL,
     fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_id_foto FOREIGN KEY id_foto REFERENCES FOTOS(id)
+    CONSTRAINT fk_id_foto FOREIGN KEY (id_foto) REFERENCES FOTOS(id)
 );
