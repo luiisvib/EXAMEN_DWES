@@ -14,8 +14,19 @@ router.get("/fotos", async (req,res) =>{
 
 router.post("/subirfoto", async (req, res) =>{
   const {titulo, url, descripcion} = req.body
-  await pool.query(`INSERT INTO FOTOS VALUES(DEFAULT, '${titulo}', '${url}', '${descripcion}', DEFAULT)`)
+  await pool.query(`INSERT INTO FOTOS(titulo, url, descripcion) VALUES('${titulo}', '${url}', '${descripcion}')`)
   res.redirect("/")
+})
+
+router.get("/like/:id", async (req, res) =>{
+  const {id} = req.params
+  await pool.query(`UPDATE FOTOS`)
+  res.send(id)
+})
+
+router.get("/dislike/:id", (req, res) =>{
+  const {id} = req.params
+  res.send(id)
 })
 
 module.exports = router;

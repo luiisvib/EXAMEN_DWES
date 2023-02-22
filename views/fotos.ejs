@@ -13,10 +13,10 @@
                 <p><%=datos[index].descripcion  %></p>
                 <p><%=datos[index].fecha  %></p>
                 <nav>
-                    <span class="material-symbols-outlined">thumb_up</span> 
-                    <span class="likes_dislikes">4</span>
-                    <span class="material-symbols-outlined">thumb_down</span> 
-                    <span class="likes_dislikes">4</span>
+                    <a href="/like/<%=datos[index].id%>"><span class="material-symbols-outlined">thumb_up</span></a>
+                    <span class="likes_dislikes"><%=datos[index].likes || 0%></span>
+                    <a href="/dislike/<%=datos[index].id%>"><span class="material-symbols-outlined">thumb_down</span></a>
+                    <span class="likes_dislikes"><%=datos[index].dislikes || 0%></span>
                 </nav>
             </section>
         <% } %>
