@@ -1,10 +1,11 @@
-const mysql = require("mysql2/promise")
+const pool_localhost = require("./db_localhost")
 
-const pool = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.USUARIO,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-})
+if (process.env.NODE_ENV == "produccion"){ //Si es producción se envia la base de datos local
+    const pool = pool_localhost
+    module.exports = pool
+}
 
-module.exports = pool
+if (process.env.NODE_ENV == "despliegue"){ //Si es desplieque se envia la base de datos de CleverCloud
+    const pool = pool_localhost
+    module.exports = pool
+}
