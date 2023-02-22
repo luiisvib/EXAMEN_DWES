@@ -26,7 +26,13 @@ router.get("/fotos/menosvotadas", async (req, res) =>{
 })
 
 router.get("/fotos/comentadas", async (req, res) =>{
-  const [datos_fotos] = await pool.query("SELECT * FROM FOTOS ORDER BY likes ASC limit 3")
+  const [datos_fotos] = await pool.query("SELECT * FROM FOTOS WHERE id IN (SELECT id_foto FROM COMENTARIOS) ORDER BY likes ASC limit 3")
+  const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+})
+
+router.get("/fotos/nocomentadas", async (req, res) =>{
+  const [datos_fotos] = await pool.query("SELECT * FROM FOTOS WHERE id NOT IN (SELECT id_foto FROM COMENTARIOS)")
   const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
   res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
 })
