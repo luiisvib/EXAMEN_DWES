@@ -19,28 +19,28 @@ router.get("/fotos", async (req,res) =>{
 router.get("/fotos/masvotadas", async (req, res) =>{
   const [datos_fotos] = await pool.query("SELECT * FROM FOTOS ORDER BY  likes DESC limit 3")
   const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
-  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos mas likes"})
 })
 
 //Página de las fotos menos votadas
 router.get("/fotos/menosvotadas", async (req, res) =>{
   const [datos_fotos] = await pool.query("SELECT * FROM FOTOS ORDER BY  likes ASC limit 3")
   const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
-  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos menos likes"})
 })
 
 //Página de las fotos comentadas
 router.get("/fotos/comentadas", async (req, res) =>{
   const [datos_fotos] = await pool.query("SELECT * FROM FOTOS WHERE id IN (SELECT id_foto FROM COMENTARIOS) ORDER BY likes ASC limit 3")
   const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
-  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos comentadas"})
 })
 
 //Página de las fotos no comentadas
 router.get("/fotos/nocomentadas", async (req, res) =>{
   const [datos_fotos] = await pool.query("SELECT * FROM FOTOS WHERE id NOT IN (SELECT id_foto FROM COMENTARIOS)")
   const [datos_comentarios] = await pool.query(`SELECT * FROM COMENTARIOS`)
-  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos"})
+  res.render("fotos", {datos_fotos: datos_fotos, datos_comentarios: datos_comentarios, titulo: "Fotos no comentadas"})
 })
 
 //Post que recoje los datos del formulario para subir una foto y lo guarda en la base de datos 
@@ -49,15 +49,13 @@ router.post("/subirfoto", async (req, res) =>{
   const datos_insertados = await pool.query(`INSERT INTO FOTOS(titulo, url, descripcion, likes, dislikes) VALUES('${titulo}', '${url}', '${descripcion}', 0, 0)`)
   const token = jwt.sign(datos_insertados[0].insertId , "my_secret_key")
   console.log(token)
-  res.render("token", {titulo: "Titulo", token:token}) //Te dirige a token.ejs donnde muestra el token
+  res.render("token", {titulo: "Subir foto", token:token}) //Te dirige a token.ejs donnde muestra el token
 })
-
-
 
 //Reridigir al formulario para solicitar token
 router.get("/comprobar_form/:id", (req,res)=>{
   const {id} = req.params
-  res.render("comprobar_token", {titulo: "Titulo", id: id})
+  res.render("comprobar_token", {titulo: "Comprobar Formulario", id: id})
 })
 
 //Comprobar token 
@@ -68,6 +66,7 @@ router.post("/comprobar_token/:id", (req,res)=>{
     if(error){
       res.render("mensaje_eliminacion", {mensaje: "DATO NO ELIMINADO", titulo: "Mensaje no eliminado"})
     }else{
+      await pool.query("DELETE FROM COMENTARIOS where id_foto NOT IN (SELECT id FROM FOTOS)")
       await pool.query(`DELETE FROM FOTOS where id=${id}`)
       res.render("mensaje_eliminacion", {mensaje: "DATO ELIMINADO", titulo: "Mensaje eliminado"})
     }
