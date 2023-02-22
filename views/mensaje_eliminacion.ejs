@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include("head")  %>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    section{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    h1{
+        font-size: 30px;
+    }
+    h2{
+        font-size: 25px;
+        margin-top: 20px;
+    }
+    a{
+        padding: 12px 6px;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+        margin-top: 20px;
+        border-radius: 15px;
+        background-color: aliceblue;
+    }
+</style>
+<body>
+    <section>
+        <h1><%=mensaje  %></h1>
+        <a href="/">Inicio</a>
+    </section>
+</body>
+</html>

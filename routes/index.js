@@ -54,24 +54,25 @@ router.post("/subirfoto", async (req, res) =>{
 
 
 
-//Comprobar el token de la foto antes de eliminar
+//Reridigir al formulario para solicitar token
 router.get("/comprobar_form/:id", (req,res)=>{
   const {id} = req.params
   res.render("comprobar_token", {titulo: "Titulo", id: id})
 })
 
-
-  // const {id} = req.params
-  // const token = req.params.token
-  // jwt.verify(token, "my_secret_key", async (error,datos) =>{
-  //   if(error){
-  //     await pool.query("DELETE FROM FOTOS where id=2")
-  //     res.send("Dato eliminado")
-  //   }else{
-  //     res.send("Dato no eliminado")
-  //   }
-  // })
-
+//Comprobar token 
+router.post("/comprobar_token/:id", (req,res)=>{
+  const {id} = req.params
+  const {token} = req.body
+  jwt.verify(token, "my_secret_key", async (error,datos) =>{
+    if(error){
+      res.render("mensaje_eliminacion", {mensaje: "DATO NO ELIMINADO", titulo: "Mensaje no eliminado"})
+    }else{
+      await pool.query(`DELETE FROM FOTOS where id=${id}`)
+      res.render("mensaje_eliminacion", {mensaje: "DATO ELIMINADO", titulo: "Mensaje eliminado"})
+    }
+  })
+})
 
 //Para actualizar los likes de la base de datos
 router.get("/like/:id", async (req, res) =>{ //Recogemos la id de la foto a la que hemos dado like
