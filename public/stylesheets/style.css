@@ -12,7 +12,7 @@ body {
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
-  height: 150px;
+  height: 20vh;
 }
 #header_index a {
   text-decoration: none;
@@ -22,4 +22,45 @@ body {
   border: 1px solid black;
   background-color: white;
   border-radius: 20px;
+}
+
+#main_index {
+  width: 100%;
+  overflow: hidden;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://assets.easymailing.com/cms/2020/07/31123959/banco-imagenes-gratis-2020-detalle.jpg");
+}
+#main_index form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: whitesmoke;
+  padding: 30px;
+  border-radius: 20px;
+}
+#main_index form h1 {
+  margin-bottom: 15px;
+}
+#main_index form input {
+  width: 300px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  padding: 4px;
+}
+#main_index form textarea {
+  width: 300px;
+  font-size: 15px;
+  margin-bottom: 15px;
+  padding: 4px;
+  height: 85px;
+}
+#main_index form button {
+  padding: 6px 12px;
+  font-size: 20px;
+  border-radius: 15px;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */
